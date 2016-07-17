@@ -1,3 +1,4 @@
+/* ==== 1 ==== */
 ;(function() {
 	"use strict";
 
@@ -5,7 +6,7 @@
 		this._str = inputStr;
 		console.log("Введена строка: " + this._str);
 	}
-	Object.prototype.calc = function() {
+	CalculateString.prototype.calc = function() {
 		var result = 0,
 			matchArr = [],
 			searchPattern = /\d+(\.\d+)?|[\+,\-,\*,\/,\=]{1}/ig;
@@ -35,5 +36,18 @@
 
 	var test2 = new CalculateString("7+7*2=ёжик");
 	console.log(test2.calc());
+
+})();
+
+/* ==== 2 ==== */
+(function() {
+	"use strict";
+
+	function RemoverChars(inputStr) {
+		this._str = inputStr;
+	}
+	// Object.class_name.prototype.method_name = function(first_argument) {
+	// 	// body...
+	// };
 
 })();
