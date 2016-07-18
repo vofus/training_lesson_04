@@ -44,10 +44,58 @@
 	"use strict";
 
 	function RemoverChars(inputStr) {
-		this._str = inputStr;
+		if(typeof(inputStr) === "string") {
+			this._str = inputStr;
+		} else {
+			throw "Ошибка! Вводимые данные должны быть строкой.";
+		}
 	}
-	// Object.class_name.prototype.method_name = function(first_argument) {
-	// 	// body...
-	// };
+	RemoverChars.prototype.removeChars = function() {
+		var result = this._str,
+			matchArr = [],
+			matchPattern = /[^\s,\.,\,,\:,\;,\!,\?]+/gi,
+			firstWord = "";
+
+		if(!/[^\s,\.,\,,\:,\;,\!,\?]+/i.test(result)) { return result; }
+		matchArr = this._str.match(matchPattern);
+
+		if(matchArr.length === 1) { return result; }
+		firstWord = matchArr[0];
+
+		for(var j=0; j<firstWord.length; j++) {
+			var searchChar = new RegExp(firstWord[j], "i");
+			var count = 0;
+			for(var i=0; i<matchArr.length; i++) {
+				if(searchChar.test(matchArr[i])) {
+					count++;
+				}
+			}
+			
+			if(count === matchArr.length) {
+				result = result.replace(new RegExp(firstWord[j], "gi"), "");
+			}
+			
+		}
+
+		return result;
+	}
+
+	var test = new RemoverChars("Чего-с изволите-с?Барин-с!");
+	console.log(test.removeChars());
+
+	var test2 = new RemoverChars("!??слово!плов олово$$$!");
+	console.log(test2.removeChars());
+
+	// Строка с одним словом
+	var test3 = new RemoverChars("!!!ab!!");
+	console.log(test3.removeChars());
+
+	// Строка без слов
+	var test4 = new RemoverChars("!!!");
+	console.log(test4.removeChars());
+
+	// Проверка на попытку создания объекта без передачи аргументов
+	var test5 = new RemoverChars();
+	console.log(test5.removeChars());
 
 })();
