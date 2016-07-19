@@ -9,9 +9,10 @@
 	CalculateString.prototype.calc = function() {
 		var result = 0,
 			matchArr = [],
-			searchPattern = /\d+(\.\d+)?|[\+,\-,\*,\/,\=]{1}/ig;
+			searchPattern = /\-?\d+(\.\d+)?|[\+,\-,\*,\/,\=]{1}/ig;
 
 		matchArr = this._str.match(searchPattern);
+		console.log(matchArr);
 
 		if(matchArr[0]*1+"" !== "NaN") {
 			result += matchArr[0]*1;
@@ -31,7 +32,7 @@
 		return result;
 	}
 
-	var test = new CalculateString("3.5 землекопа +4 поросенка *10 рублей - 5.5 $ /5 человек =");
+	var test = new CalculateString("- 3.5 землекопа +-4 поросенка *10 рублей - 5.5 $ /5 человек =");
 	console.log(test.calc());
 
 	var test2 = new CalculateString("7+7*2=ёжик");
